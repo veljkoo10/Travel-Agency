@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base th:href="@{/TuristickaAgencija}">
+    <meta charset="UTF-8" />
+<!--    <link rel="stylesheet" type="text/css" href="../static/css/StiloviForma.css"/>-->
+<!--    <link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>-->
+<!--    <link rel="stylesheet"  type="text/css" href="css/Globalni.css"/>-->
+<!--    <link rel="stylesheet" type="text/css" href="css/ModernijiStil.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/LoginRegistracija.css"/>
+    <title>Prijava korisnika</title>
+
+</head>
+<body>
+<h1 class="headertekst">Prijava na sistem</h1>
+<ul>
+    <li><a th:href="@{/korisnici/registracija}">Registruj se</a></li>
+    <li><a th:href="@{/putovanja}">Sva putovanja</a></li>
+</ul>
+<br/>
+<form method="post" action="http://localhost:8080/TuristickaAgencija/korisnici/login">
+    <table>
+        <caption>Prijava korisnika na sistem</caption>
+        <tr><th>Email:</th><td><input type="text" value="" name="email" required/></td></tr>
+        <tr><th>Šifra:</th><td><input type="password" value="" name="sifra" required/></td></tr>
+        <tr><th></th><td><input type="submit" value="Prijavi se" /></td>
+    </table>
+</form>
+</body>
+</html>

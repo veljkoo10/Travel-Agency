@@ -1,0 +1,49 @@
+body, h1, h2, h3, p, ul, li, th, td, label {
+    color: #ffffff;
+}
+
+h1.headertekst {
+    text-align: center;
+    color: #ffffff;
+}
+
+a {
+    color: aquamarine;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f34336;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+}
+
+nav {
+    background-color: #555;
+    padding: 5px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #777;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}

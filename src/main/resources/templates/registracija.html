@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base th:href="@{/TuristickaAgencija}">
+    <meta charset="UTF-8"/>
+    <script>
+        function validatePassword() {
+            var password = document.getElementsByName("sifra")[0].value;
+            var confirmPassword = document.getElementsByName("potvrdaSifre")[0].value;
+
+            if (password !== confirmPassword) {
+                alert("Šifre se ne poklapaju. Molimo vas da ih unesete ponovo.");
+                return false;
+            }
+            return validateEmailFormat();
+        }
+
+
+        function validateEmailFormat() {
+            var email = document.getElementsByName("email")[0].value;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                alert("Unesite validan email format.");
+                return false;
+            }
+
+            return true;
+        }
+
+        window.onload=function(){//from ww  w . j  a  va2s. c  o  m
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementsByName("datumRodjenja")[0].setAttribute('max', today);
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/ModernijiStil.css"/>
+    <title>Registracija</title>
+</head>
+<body>
+<h1 class="headertekst">Registracija</h1>
+<ul>
+    <li><a th:href="@{/korisnici/login}">Prijava</a></li>
+    <li><a th:href="@{/putovanja}">Sva putovanja</a></li>
+</ul>
+<br/>
+<form method="post" action="http://localhost:8080/TuristickaAgencija/korisnici/registracija" onsubmit="return validatePassword()">
+    <table>
+        <caption>Registracija</caption>
+        <tr>
+            <th>Ime:</th>
+            <td><input type="text" value="" name="ime" required/></td>
+        </tr>
+        <tr>
+            <th>Prezime:</th>
+            <td><input type="text" value="" name="prezime" required/></td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td><input type="text" value="" name="email" required/></td>
+        </tr>
+        <tr>
+            <th>Šifra:</th>
+            <td><input type="password" value="" name="sifra" required/></td>
+        </tr>
+        <tr>
+            <th>Potvrdi šifru:</th>
+            <td>
+                <input type="password" value="" name="potvrdaSifre" required/>
+            </td>
+        </tr>
+        <tr>
+            <th>Datum rodjenja:</th>
+            <td><input type="date" value="" name="datumRodjenja" id="datumRodjenja" required/>
+            </td>
+        </tr>
+        <tr>
+            <th>Jmbg:</th>
+            <td><input type="text" value="" name="jmbg" required/></td>
+        </tr>
+        <tr>
+            <th>Adresa:</th>
+            <td><input type="text" value="" name="adresa" required/></td>
+        </tr>
+        <tr>
+            <th>Broj telefona:</th>
+            <td><input type="text" value="" name="brojTelefona" required/></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><input type="submit" value="Registruj se"/></td>
+    </table>
+</form>
+</body>
+</html>

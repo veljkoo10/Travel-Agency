@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <base th:href="@{/TuristickaAgencija}">
+    <link rel="stylesheet" type="text/css" href="../static/css/StiloviForma.css"/>
+    <link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>
+    <link rel="stylesheet"  type="text/css" href="css/Globalni.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ModernijiStil.css"/>
+    <script src="webjars/jquery/3.2.1/jquery.js" type="text/javascript"></script>
+    <script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/odbijZahtev.js" type="text/javascript"></script>
+    <title>Odbij zahtev za putovanjem</title>
+</head>
+<body>
+<h1 class="headertekst">Odbijanje zahteva za putovanjem</h1>
+<ul>
+    <li><a th:href="@{/putovanja}">Pocetna</a></li>
+    <li><a th:href="@{/korisnici/profil}">Profil</a></li>
+    <li><a th:href="@{/korisnici/logout}">Odjavi se</a></li>
+</ul>
+<br/>
+<br/>
+<form id = "izmenaLozinke" method="post" th:action="@{/putovanja/zahtev/odbij}" enctype="text/plain">
+    <table>
+        <caption>Odbij zahtev</caption>
+        <tr>
+            <th>Ostavi komentar:</th>
+            <td><input type="text" value="" name="komentar" required/></td>
+            <input type="number" th:value="${putovanje.id}" name="idPutovanja" hidden required/>
+        </tr>
+        <tr><th></th><td><input type="submit" value="Potvrda" /></td>
+    </table>
+</form>
+</body>
+</html>

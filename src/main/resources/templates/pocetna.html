@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <base th:href="@{/TuristickaAgencija}">
+    <title>Putovanja</title>
+    <script src="webjars/jquery/3.2.1/jquery.js" type="text/javascript"></script>
+    <script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/ModernijiStil.css"/>
+    <script th:inline="javascript">
+        var akcijskaPutovanja = /*[[${akcijskaPutovanja}]]*/ [];
+        var putovanja = /*[[${putovanja}]]*/ [];
+        var kategorije =  /*[[${kategorije}]]*/ []
+    </script>
+    <script src="js/pretragaPutovanja.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 class="headertekst">Sva putovanja</h1>
+<ul>
+    <li><a th:href="@{/korisnici/login}">Prijava</a></li>
+    <li><a th:href="@{/korisnici/registracija}">Registracija</a></li>
+</ul>
+<table>
+    <thead>
+    <tr>
+        <th>Prevozno Sredstvo</th>
+        <th>Kategorija Putovanja</th>
+        <th>Smestajna Jedinica</th>
+        <th>Naziv Destinacije</th>
+        <th>Slika Lokacije</th>
+        <th>Datum i Vreme Polaska</th>
+        <th>Datum i Vreme Povratka</th>
+        <th>Broj Nocenja</th>
+        <th>Cena Aranzmana</th>
+        <th>Ukupan Broj Mesta</th>
+        <th>Broj Slobodnih Mesta</th>
+        <th>Akcijska cena</th>
+        <th>Datum vazenja popusta</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through all trips and display them in a table -->
+    <tr th:each="putovanje : ${akcijskaPutovanja}">
+        <td th:text="${putovanje.prevoznoSredstvo}"></td>
+        <td th:text="${putovanje.nazivKategorije}"></td>
+        <td th:text="${putovanje.smestajnaJedinica}"></td>
+        <td th:text="${putovanje.nazivDestinacije}"></td>
+        <td><img th:src="${putovanje.slikaLokacije}" alt="Slika lokacije" class="img" width="200" height="150"></td>
+        <td th:text="${putovanje.datumVremePolaska}"></td>
+        <td th:text="${putovanje.datumVremePovratka}"></td>
+        <td th:text="${putovanje.brojNocenja}"></td>
+        <td th:text="${putovanje.cenaAranzmana}"></td>
+        <td th:text="${putovanje.ukupanBrojMesta}"></td>
+        <td th:text="${putovanje.brojSlobodnihMesta}"></td>
+        <td th:if="${putovanje.procenatPopusta != null}" th:text="${putovanje.cenaAranzmana * (1 - (putovanje.procenatPopusta / 100))}"></td>
+        <td th:if="${putovanje.procenatPopusta == null}">Nema aktivnih popusta</td>
+        <td th:if="${putovanje.datumVazenjaPopusta != null}" th:text="${putovanje.datumVazenjaPopusta}"></td>
+        <td th:if="${putovanje.datumVazenjaPopusta == null}">Nema aktivnih popusta</td>
+        <td>
+            <!-- Dodajte link ka stranici za rezervaciju sa parametrom id putovanja -->
+            <a th:href="@{/korisnici/login}" class="rezervisi-link">Rezerviši putovanje</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h2>Search Trips</h2>
+<form action="#" th:action="@{/search}" method="get">
+    <label for="prevoznoSredstvo">Prevozno Sredstvo:</label>
+    <select id="prevoznoSredstvo" name="prevoznoSredstvo">
+        <option value="AVION">Avion</option>
+        <option value="AUTOBUS">Autobus</option>
+        <option value="SOPSTVENI_PREVOZ">Sopstveni prevoz</option>
+    </select><br>
+
+    <label for="nazivDestinacije">Naziv Destinacije:</label>
+    <input type="text" id="nazivDestinacije" name="nazivDestinacije"><br>
+
+    <label for="kategorija">Kategorija Putovanja:</label>
+    <select id="kategorija" name="kategorija">
+        <option value="">-- Izaberite kategoriju --</option>
+        <option th:each="kategorija : ${kategorije}" th:value="${kategorija}" th:text="${kategorija}"></option>
+    </select><br>
+
+    <label for="brojNocenja">Broj Nocenja:</label>
+    <input type="number" id="brojNocenja" name="brojNocenja"><br>
+
+    <label for="minimalnaCenaAranzmana">Minimalna Cena Aranzmana:</label>
+    <input type="number" id="minimalnaCenaAranzmana" name="minimalnaCenaAranzmana"><br>
+
+    <label for="maksimalnaCenaAranzmana">Maksimalna Cena Aranzmana:</label>
+    <input type="number" id="maksimalnaCenaAranzmana" name="maksimalnaCenaAranzmana"><br>
+
+    <input type="submit" value="Search">
+    <label for="sort">Sort By:</label>
+    <select id="sort" name="sort">
+        <option value="">--Select--</option>
+        <option value="nazivDestinacije">Naziv Destinacije</option>
+        <option value="cenaAranzmana">Cena Aranzmana</option>
+        <option value="brojNocenja">Broj Nocenja</option>
+    </select><br>
+</form>
+</body>
+</html>

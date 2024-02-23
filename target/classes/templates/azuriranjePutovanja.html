@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <base th:href="@{/TuristickaAgencija}"><!-- popuni href atribut vrednosšću context path-a -->
+    <link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>
+    <link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>
+    <link rel="stylesheet"  type="text/css" href="css/Globalni.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ModernijiStil.css"/>
+    <title>Azuriraj putovanje</title>
+    <script src="webjars/jquery/3.2.1/jquery.js" type="text/javascript"></script>
+    <script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/azuriranjePutovanja.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 class="headertekst">Ažuriranje putovanja</h1>
+<ul>
+    <li><a th:href="@{/putovanja}">Pocetna</a></li>
+    <li><a th:href="@{/putovanja/dodavanjePutovanja}">Dodavanje putovanja</a></li>
+    <li><a th:href="@{/putovanja/zahtev/all}">Zahtevi za putovanjima</a></li>
+    <li><a th:href="@{/korisnici/profil}">Profil</a></li>
+    <li><a th:href="@{/komentari}">Dobijeni komentari</a></li>
+    <li><a th:href="@{/korisnici/logout}">Odjavi se</a></li>
+</ul>
+<form id = "azuriranjePutovanja" method="post" th:action="@{/putovanja/update}" enctype="multipart/form-data">
+    <label for="prevoznoSredstvo">Prevozno sredstvo:</label><br>
+    <select id="prevoznoSredstvo" name="prevoznoSredstvo" th:value="${putovanje.prevoznoSredstvo}">
+        <option value="AVION">Avion</option>
+        <option value="AUTOBUS">Autobus</option>
+        <option value="SOPSTVENI_PREVOZ">Sopstveni prevoz</option>
+    </select></br>
+    <!--  <input type="text" id="prevoznoSredstvo" name="prevoznoSredstvo"><br>-->
+    <label for="smestajnaJedinica">Smestajna jedinica:</label><br>
+    <select id="smestajnaJedinica" name="smestajnaJedinica" th:value="${putovanje.smestajnaJedinica}">
+        <option value="HOTEL">Hotel</option>
+        <option value="APARTMAN">Apartman</option>
+    </select></br>
+    <label for="nazivDestinacije">Naziv destinacije:</label><br>
+    <input type="text" id="nazivDestinacije" name="nazivDestinacije" th:value="${putovanje.nazivDestinacije}"><br>
+    <label for="nazivKategorije">Naziv kategorije:</label><br>
+    <input type="text" id="nazivKategorije" name="nazivKategorije" th:value="${putovanje.nazivKategorije}"><br>
+    <label for="slikaLokacije">Slika lokacije:</label><br>
+    <input type="file" id="slikaLokacije" name="slikaLokacije"><br>
+    <label for="datumVremePolaska">Datum i vreme polaska:</label><br>
+    <input type="datetime-local" id="datumVremePolaska" name="datumVremePolaska" th:value="${putovanje.datumVremePolaska}"><br>
+    <label for="datumVremePovratka">Datum i vreme povratka:</label><br>
+    <input type="datetime-local" id="datumVremePovratka" name="datumVremePovratka" th:value="${putovanje.datumVremePovratka}"><br>
+    <label for="brojNocenja">Broj nocenja:</label><br>
+    <input type="number" id="brojNocenja" name="brojNocenja" th:value="${putovanje.brojNocenja}"><br>
+    <label for="cenaAranzmana">Cena aranzmana:</label><br>
+    <input type="number" id="cenaAranzmana" name="cenaAranzmana" th:value="${putovanje.cenaAranzmana}"><br>
+    <label for="ukupanBrojMesta">Ukupan broj mesta:</label><br>
+    <input type="number" id="ukupanBrojMesta" name="ukupanBrojMesta" th:value="${putovanje.ukupanBrojMesta}"><br>
+    <label for="brojSlobodnihMesta">Broj slobodnih mesta:</label><br>
+    <input type="number" id="brojSlobodnihMesta" name="brojSlobodnihMesta" th:value="${putovanje.brojSlobodnihMesta}"><br><br>
+    <input type="number" id="id" name="id" th:value="${putovanje.id}" hidden><br>
+    <input type="submit" value="Dodaj">
+</form>
+</body>
+</html>

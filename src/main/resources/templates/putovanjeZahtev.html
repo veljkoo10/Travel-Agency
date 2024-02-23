@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <base th:href="@{/TuristickaAgencija}">
+    <link rel="stylesheet" type="text/css" href="css/ModernijiStil.css"/>
+    <title>Dodaj zahtev za putovanjem</title>
+    <script src="webjars/jquery/3.2.1/jquery.js" type="text/javascript"></script>
+    <script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/putovanjeZahtev.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 class="headertekst">Zahtev za putovanjem</h1>
+<ul>
+    <li><a th:href="@{/putovanja}">Pocetna</a></li>
+    <li><a th:href="@{/putovanja/zahtev}">Kreiranje putovanja na zahtev</a></li>
+    <li><a th:href="@{/putovanja/zahtev/kupac}">Ponude na zahteve</a></li>
+    <li><a th:href="@{/korisnici/profil}">Profil</a></li>
+    <li><a th:href="@{/komentari}">Dobijeni komentari</a></li>
+    <li><a th:href="@{/korisnici/logout}">Odjavi se</a></li>
+</ul>
+<form id = "dodavanjePutovanja" method="post" th:action="@{/putovanja/zahtev/add}">
+    <label for="prevoznoSredstvo">Prevozno sredstvo:</label><br>
+    <select id="prevoznoSredstvo" name="prevoznoSredstvo">
+        <option value="AVION">Avion</option>
+        <option value="AUTOBUS">Autobus</option>
+        <option value="SOPSTVENI_PREVOZ">Sopstveni prevoz</option>
+    </select></br>
+    <!--  <input type="text" id="prevoznoSredstvo" name="prevoznoSredstvo"><br>-->
+    <label for="nazivDestinacije">Naziv destinacije:</label><br>
+    <input type="text" id="nazivDestinacije" name="nazivDestinacije"><br>
+    <label for="datumVremePolaska">Datum i vreme polaska:</label><br>
+    <input type="datetime-local" id="datumVremePolaska" name="datumVremePolaska"><br>
+    <label for="datumVremePovratka">Datum i vreme povratka:</label><br>
+    <input type="datetime-local" id="datumVremePovratka" name="datumVremePovratka"><br>
+    <label for="ukupanBrojMesta">Ukupan broj mesta:</label><br>
+    <input type="number" id="ukupanBrojMesta" name="ukupanBrojMesta"><br>
+    <input type="submit" value="Kreiraj">
+</form>
+</body>
+</html>

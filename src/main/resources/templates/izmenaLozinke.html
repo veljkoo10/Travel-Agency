@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <script>
+        function validatePasswords() {
+            var password = document.getElementsByName("sifra")[0].value;
+            var confirmPassword = document.getElementsByName("potvrdaSifre")[0].value;
+
+            if (password !== confirmPassword) {
+                alert("Šifre se ne poklapaju. Molimo vas da ih unesete ponovo.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <base th:href="@{/TuristickaAgencija}">
+    <link rel="stylesheet" type="text/css" href="css/ModernijiStil.css"/>
+    <title>Izmena lozinke</title>
+</head>
+<body>
+<ul>
+    <li><a href="registracija.html">Registruj se</a></li>
+</ul>
+<br/>
+<h1 class="headertekst">Izmena lozinke</h1>
+<ul>
+    <li><a th:href="@{/putovanja}">Pocetna</a></li>
+    <li><a th:href="@{/korisnici/logout}">Odjavi se</a></li>
+</ul>
+<br/>
+<form id = "izmenaLozinke" method="post" th:action="@{/korisnici/izmenaLozinke}" onsubmit="return validatePasswords()">
+    <table>
+        <caption>Izmena lozinke</caption>
+        <tr>
+            <th>Šifra:</th>
+            <td><input type="password" value="" name="sifra" required/></td>
+        </tr>
+        <tr>
+            <th>Potvrdi šifru:</th>
+            <td>
+                <input type="password" value="" name="potvrdaSifre" required/>
+            </td>
+        </tr>
+        <tr><th></th><td><input type="submit" value="Potvrda" /></td>
+    </table>
+</form>
+</body>
+</html>

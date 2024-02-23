@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <base th:href="@{/TuristickaAgencija}"><!-- popuni href atribut vrednosšću context path-a -->
+<!--    <link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>-->
+<!--    <link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>-->
+<!--    <link rel="stylesheet"  type="text/css" href="css/Globalni.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/ModernijiStil.css"/>
+    <title>Izmena profila</title>
+    <script src="webjars/jquery/3.2.1/jquery.js" type="text/javascript"></script>
+    <script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+    <script th:inline="javascript">
+        var korisnik = /*[[${korisnik}]]*/ [];
+        var rezervacije = /*[[${rezervacije}]]*/ [];
+        function isCancellationPossible(datumPolaska) {
+            // Pretvori datumPolaska u JavaScript Date objekat
+            var dateOfDeparture = new Date(datumPolaska);
+
+            // Dobij trenutni datum i vreme
+            var now = new Date();
+
+            // Dodaj 48 sati (48 * 60 * 60 * 1000 milisekundi) na datum polaska
+            dateOfDeparture.setTime(dateOfDeparture.getTime() - (48 * 60 * 60 * 1000));
+
+            // Proveri da li je otkazivanje moguće
+            return dateOfDeparture > now;
+        }
+    </script>
+    <script src="js/izmenaProfila.js" type="text/javascript"></script>
+    <script src="js/filtriranjeRezervacija.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 class="headertekst">Profil</h1>
+<ul>
+    <li><a th:href="@{/putovanja}">Pocetna</a></li>
+    <li><a th:href="@{/korisnici/logout}">Odjavi se</a></li>
+</ul>
+<form id = "izmenaProfila" method="post" th:action="@{/korisnici/edit}">
+    <label for="ime">Ime:</label><br>
+    <input type="text" id="ime" name="ime" th:value="${korisnik.ime}" required><br>
+    <label for="prezime">Prezime:</label><br>
+    <input type="text" id="prezime" name="prezime" th:value="${korisnik.prezime}" required><br>
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email" th:value="${korisnik.email}" required><br>
+    <label for="datumRodjenja">Datum rodjenja:</label><br>
+    <input type="date" id="datumRodjenja" name="datumRodjenja" th:value="${korisnik.datumRodjenja}" required><br>
+    <label for="jmbg">Jmbg:</label><br>
+    <input type="text" id="jmbg" name="jmbg" th:value="${korisnik.jmbg}" required><br>
+    <label for="adresa">Adresa:</label><br>
+    <input type="text" id="adresa" name="adresa" th:value="${korisnik.adresa}" required><br>
+    <label for="brTelefona">Broj telefona:</label><br>
+    <input type="text" id="brTelefona" name="brTelefona" th:value="${korisnik.brTelefona}" required><br>
+    <label for="datumRegistracije">Datum registracije:</label><br>
+    <input type="text" id="datumRegistracije" name="datumRegistracije" disabled th:value="${korisnik.datumPrijave}" required><br>
+    <input type="submit" value="Izmeni">
+</form>
+<ul>
+    <li><a th:href="@{/korisnici/izmenaLozinke}">Izmena lozinke</a></li>
+</ul>
+<table>
+    <thead>
+    <tr>
+        <th>Naziv destinacije</th>
+        <th>Datum polaska</th>
+        <th>Datum povratka</th>
+        <th>Broj mesta</th>
+        <th>Cena aranzmana</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through all trips and display them in a table -->
+    <tr th:each="rezervacija : ${rezervacije}">
+        <td th:text="${rezervacija.nazivDestinacije}"></td>
+        <td th:text="${rezervacija.datumPolaska}"></td>
+        <td th:text="${rezervacija.datumPovratka}"></td>
+        <td th:text="${rezervacija.brojMesta}"></td>
+        <td th:text="${rezervacija.cenaAranzmana}"></td>
+        <td>
+            <!-- Dodajte link ka stranici za rezervaciju sa parametrom id putovanja -->
+            <a th:if="${rezervacija.mogucnostOtkazivanja(rezervacija.datumPolaska)}"
+               th:href="@{/rezervacija/otkazi/{id}(id=${rezervacija.id})}" class="otkazi-link">Otkazi rezervaciju</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Search Trips</h2>
+<label for="datumFilter">Datum rezervacije:</label>
+<select id="datumFilter" name="datumFilter">
+    <option value="">--Select--</option>
+    <option value="proslost">U proslosti</option>
+    <option value="buducnost">U buducnosti</option>
+</select><br>
+<input type="button" value="Search" id="search" name="search">
+</body>
+</html>
